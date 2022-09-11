@@ -8,6 +8,7 @@ import helmet from "helmet";
 import httpStatus = require("http-status");
 import { errorConverter, errorHandler, rateLimiter } from "./middlewares";
 import { ApiError } from "./utils";
+import { v1Routes } from "./routes/v1";
 
 const Logger = logger("src/app.ts");
 
@@ -25,6 +26,8 @@ app.get("/", (req: Request, res: Response) => {
   Logger("/").info("rnequest recieved");
   res.send("Coming soon. Eating treats right now.");
 });
+
+app.use("/v1", v1Routes);
 
 // send back a 404 error for any unknown api request
 app.use((req, res, next) => {
