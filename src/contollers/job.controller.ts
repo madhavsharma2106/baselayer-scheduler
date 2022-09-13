@@ -22,5 +22,5 @@ export const createJob = catchAsync(async (req: Request, res: Response) => {
   // Schedule Job
   schedulerService.scheduleJob(req.body);
 
-  res.send(successResponse("Recieved"));
+  res.send(successResponse(jobServiceResponse));
 });

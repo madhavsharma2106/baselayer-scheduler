@@ -15,4 +15,11 @@ export interface IJobProps {
     | string
     | number;
   requestOptions: AxiosRequestConfig;
+  isRecurring: boolean;
+}
+
+export interface IJobExecutionProps {
+  name: string;
+  status: "success" | "failed";
+  job: string;
 }

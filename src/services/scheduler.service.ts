@@ -1,4 +1,5 @@
 import * as schedule from "node-schedule";
+import { jobService } from ".";
 import { logger } from "../config";
 import { IJobProps } from "../types";
 const Logger = logger("scheduler.service");
@@ -11,7 +12,12 @@ export const scheduleJob = (job: IJobProps) => {
     job.name,
     job.schedule,
     function (date: Date) {
-      LOGGER.info(`Exectued job ${job.name} at ${date} `);
+      LOGGER.info(`Execting job ${job.name} at ${date} `);
+      jobService.saveJobExecution({
+        job: job.name,
+        status: "success",
+        name: job.name,
+      });
     }
   );
 
