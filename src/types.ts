@@ -14,7 +14,7 @@ export interface IJobProps {
     | Date
     | string
     | number;
-  requestOptions: AxiosRequestConfig;
+  taskExecutionAPIConfig: AxiosRequestConfig;
   isRecurring: boolean;
 }
 
@@ -22,4 +22,5 @@ export interface IJobExecutionProps {
   name: string;
   status: "success" | "failed";
   job: string;
+  taskExecutionAPIConfig: AxiosRequestConfig;
 }

@@ -1,3 +1,4 @@
+import axios from "axios";
 import { logger } from "../config";
 import { Job, JobExecution } from "../models";
 import { IJobExecutionProps, IJobProps } from "../types";
@@ -9,8 +10,12 @@ export const saveJob = async (job: IJobProps) => {
   return await Job.create({ ...job });
 };
 
-export const saveJobExecution = async (jobExecution: IJobExecutionProps) => {
-  const LOGGER = Logger("saveJobExecution");
+export const executeJob = async (jobExecution: IJobExecutionProps) => {
+  const LOGGER = Logger("executeJob");
   LOGGER.info(`Saving JobExecution ${JSON.stringify(jobExecution)}`);
   await JobExecution.create({ ...jobExecution });
+
+  LOGGER.info(`Executing Job ${JSON.stringify(jobExecution)}`);
+  const { data: res } = await axios(jobExecution.taskExecutionAPIConfig);
+  LOGGER.info(`Request responded with ${res}`);
 };

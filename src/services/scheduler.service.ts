@@ -13,10 +13,11 @@ export const scheduleJob = (job: IJobProps) => {
     job.schedule,
     function (date: Date) {
       LOGGER.info(`Execting job ${job.name} at ${date} `);
-      jobService.saveJobExecution({
+      jobService.executeJob({
         job: job.name,
         status: "success",
         name: job.name,
+        taskExecutionAPIConfig: job.taskExecutionAPIConfig,
       });
     }
   );
