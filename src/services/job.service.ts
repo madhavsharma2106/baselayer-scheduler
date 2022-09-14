@@ -12,6 +12,7 @@ export const saveJob = async (job: IJobProps) => {
 
 export const executeJob = async (jobExecution: IJobExecutionProps) => {
   const LOGGER = Logger("executeJob");
+
   LOGGER.info(`Saving JobExecution ${JSON.stringify(jobExecution)}`);
   await JobExecution.create({ ...jobExecution });
 
