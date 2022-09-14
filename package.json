@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/madhavsharma2106/hausmeister-scheduler.git"
+    "url": "git+ssh://git@github.com/madhavsharma2106/baselayer-scheduler.git"
   },
   "author": "Madhav Sharma",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/madhavsharma2106/hausmeister-scheduler/issues"
+    "url": "https://github.com/madhavsharma2106/baselayer-scheduler/issues"
   },
-  "homepage": "https://github.com/madhavsharma2106/hausmeister-scheduler#readme",
+  "homepage": "https://github.com/madhavsharma2106/baselayer-scheduler#readme",
   "dependencies": {
     "axios": "^0.27.2",
     "cors": "^2.8.5",

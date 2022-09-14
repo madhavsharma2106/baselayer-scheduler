@@ -17,9 +17,9 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Build the Docker image
-        run: docker build -t madhavontheweb/hausmeister-scheduler:latest .
+        run: docker build -t madhavontheweb/baselayer-scheduler:latest .
       - name: Push the image
-        run: docker push madhavontheweb/hausmeister-scheduler:latest
+        run: docker push madhavontheweb/baselayer-scheduler:latest
       - name: GitHub Action for DigitalOcean - doctl
         uses: digitalocean/action-doctl@v2.1.1
         with:
@@ -27,4 +27,4 @@ jobs:
       - name: Save DigitalOcean kubeconfig with short-lived credentials
         run: doctl kubernetes cluster kubeconfig save --expiry-seconds 600 ${{ secrets.CLUSTER_NAME }}
       - name: Rollout new Deployment
-        run: kubectl rollout restart deployment/hausmeister-scheduler-deployment
+        run: kubectl rollout restart deployment/baselayer-scheduler-deployment

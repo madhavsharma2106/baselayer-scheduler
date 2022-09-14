@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: hausmeister-scheduler-deployment
+  name: baselayer-scheduler-deployment
   labels:
-    app: hausmeister-scheduler
+    app: baselayer-scheduler
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: hausmeister-scheduler
+      app: baselayer-scheduler
   template:
     metadata:
       labels:
-        app: hausmeister-scheduler
+        app: baselayer-scheduler
     spec:
       containers:
-        - name: hausmeister-scheduler
-          image: madhavontheweb/hausmeister-scheduler:latest
+        - name: baselayer-scheduler
+          image: madhavontheweb/baselayer-scheduler:latest
           imagePullPolicy: "Always"
           env:
             - name: NODE_ENV
@@ -24,7 +24,7 @@ spec:
             - name: PORT
               value: "5050"
             - name: APP_NAME
-              value: hausmeister-scheduler
+              value: baselayer-scheduler
             - name: MONGODB_URL
               valueFrom:
                 secretKeyRef:
@@ -36,10 +36,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: hausmeister-scheduler-service
+  name: baselayer-scheduler-service
 spec:
   ports:
     - port: 80
       targetPort: 5050
   selector:
-    app: hausmeister-scheduler
+    app: baselayer-scheduler
