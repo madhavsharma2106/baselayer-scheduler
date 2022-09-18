@@ -16,16 +16,32 @@ export const executeJob = async (jobExecution: IJobExecutionProps) => {
   LOGGER.info(`Saving JobExecution ${JSON.stringify(jobExecution)}`);
   const JobExecutionResponse = await JobExecution.create({ ...jobExecution });
   LOGGER.info(
-    `JobExecutionResponse is: ${JSON.stringify({ JobExecutionResponse })}`
+    `JobExecution.create response is: ${JSON.stringify({
+      JobExecutionResponse,
+    })}`
   );
 
-  // try {
-  //   LOGGER.info(`Executing Job ${JSON.stringify(jobExecution)}`);
-  //   const { data: res } = await axios(jobExecution.taskExecutionAPIConfig);
+  try {
+    LOGGER.info(`Executing Job ${JSON.stringify(jobExecution)}`);
+    const { data: jobExecutionAPIResponse } = await axios(
+      jobExecution.taskExecutionAPIConfig
+    );
+    LOGGER.info(
+      `Request responded with ${JSON.stringify(jobExecutionAPIResponse)}`
+    );
 
-  //   LOGGER.info(`Request responded with ${res}`);
-  // } catch (error) {
-  //   // Stringifying an error could cause problems as we could get an error
-  //   LOGGER.info(`Request responded with ${JSON.stringify(error)}`);
-  // }
+    // Save response against job Exectution
+    const JobExecutionResponse1 = await JobExecution.findByIdAndUpdate(
+      JobExecutionResponse.id,
+      { executionResponse: jobExecutionAPIResponse }
+    );
+    LOGGER.info(
+      `JobExecution.findByIdAndUpdate responded with ${JSON.stringify(
+        JobExecutionResponse1
+      )}`
+    );
+  } catch (error) {
+    // Stringifying an error could cause problems as we could get an error
+    LOGGER.info(`Request responded with ${JSON.stringify(error)}`);
+  }
 };
