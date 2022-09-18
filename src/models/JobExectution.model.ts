@@ -16,6 +16,7 @@ const schema = new Schema<IJobExecution>(
     status: { type: String, required: true },
     job: { type: String, required: true },
     taskExecutionAPIConfig: { type: Object, required: true },
+    executionResponse: { type: Object },
   },
   { timestamps: true }
 );

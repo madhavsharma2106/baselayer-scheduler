@@ -11,14 +11,19 @@ export const scheduleJob = (job: IJobProps) => {
   const nodeScheduleResponse: schedule.Job = schedule.scheduleJob(
     job.name,
     job.schedule,
-    function (date: Date) {
+    async (date: Date) => {
+      const LOGGER = Logger("jobExecutionCallBack");
+
       LOGGER.info(`Execting job ${job.name} at ${date} `);
-      jobService.executeJob({
+      const jobServiceResponse = await jobService.executeJob({
         job: job.name,
         status: "success",
         name: job.name,
         taskExecutionAPIConfig: job.taskExecutionAPIConfig,
       });
+      LOGGER.info(
+        `jobServiceResponse is ${JSON.stringify({ jobServiceResponse })}`
+      );
     }
   );
 

@@ -17,7 +17,9 @@ export const createJob = catchAsync(async (req: Request, res: Response) => {
 
   // Save job
   const jobServiceResponse = await jobService.saveJob(req.body);
-  LOGGER.info(`jobService responded with ${jobServiceResponse}`);
+  LOGGER.info(
+    `jobServiceResponse is ${JSON.stringify({ jobServiceResponse })}`
+  );
 
   // Schedule Job
   schedulerService.scheduleJob(req.body);

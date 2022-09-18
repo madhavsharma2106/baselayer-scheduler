@@ -23,4 +23,5 @@ export interface IJobExecutionProps {
   status: "success" | "failed";
   job: string;
   taskExecutionAPIConfig: AxiosRequestConfig;
+  executionResponse?: any;
 }
