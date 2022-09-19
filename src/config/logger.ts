@@ -20,9 +20,12 @@ const papertrail = new winston.transports.Syslog({
 });
 
 const transports = [];
-if (config.env === "development")
+
+if (config.env === "development") {
   transports.push(new winston.transports.Console({}));
-if (config.env === "production") transports.push(papertrail);
+} else {
+  transports.push(papertrail);
+}
 
 const _logger = winston.createLogger({
   level: config.env === "development" ? "debug" : "info",
@@ -42,7 +45,7 @@ const _logger = winston.createLogger({
       }
     )
   ),
-  transports: transports, // TODO: Update to run PT on prod later.
+  transports,
 });
 
 export const logger = function (moduleName) {
